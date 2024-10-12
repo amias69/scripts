@@ -26,7 +26,7 @@ if ! command -v zsh &> /dev/null; then
         fedora|rhel)
             sudo dnf install zsh -y
             ;;
-        arch)
+        arch|endeavouros)
             sudo pacman -S zsh --noconfirm
             ;;
         *)
