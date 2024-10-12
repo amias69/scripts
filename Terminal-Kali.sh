@@ -76,7 +76,7 @@ case $DISTRO in
         sudo dnf install python3-pip -y
         pip3 install pywal
         ;;
-    arch)
+    arch|endeavouros)
         sudo pacman -S pywal --noconfirm
         ;;
     *)
