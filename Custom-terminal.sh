@@ -62,10 +62,11 @@ cat > "$STARSHIP_CONFIG" <<EOL
 # Configuración de Starship para el prompt
 add_newline = false
 
-# Cambia el formato global del prompt
-format = """\
+# Este formato debe ser una cadena de texto
+format = """
 ┌──([$username@$hostname])-[\$directory]
-└─\$character """
+└─\$character
+"""
 
 [character]
 success_symbol = "\$"
@@ -79,6 +80,7 @@ format = "$hostname" # Muestra solo el hostname, sin extras
 truncate_to_repo = false # No trunca a repositorios
 truncation_length = 2 # Ajusta cuántos directorios mostrar
 format = "[\$path]" # Muestra el directorio actual entre corchetes
+
 EOL
 echo "Configuración de Starship creada en $STARSHIP_CONFIG."
 
