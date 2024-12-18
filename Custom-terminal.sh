@@ -62,7 +62,6 @@ cat > "$STARSHIP_CONFIG" <<EOL
 # Configuración de Starship para el prompt
 add_newline = false
 
-[format]
 # Cambia el formato global del prompt
 format = """\
 ┌──([$username@$hostname])-[\$directory]
