@@ -65,10 +65,9 @@ symbol = "└─$" # Cambia el símbolo al que deseas
 error_symbol = "└─$" # Para mantenerlo uniforme al fallar
 
 [hostname]
-format = "on" # Activa el hostname
 ssh_only = false # Siempre muestra el hostname
 style = "bold dimmed green" # Cambia el estilo si quieres
-format = "┌──($hostname)-[$directory]"
+format = "on" # Define un único formato
 
 [directory]
 truncation_length = 2 # Ajusta cuántos directorios mostrar
