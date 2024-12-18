@@ -60,21 +60,26 @@ mkdir -p "$(dirname "$STARSHIP_CONFIG")"
 
 cat > "$STARSHIP_CONFIG" <<EOL
 # Configuración de Starship para el prompt
+add_newline = false
+
+[format]
+# Cambia el formato global del prompt
+format = """\
+┌──([$username@$hostname])-[\$directory]
+└─\$character """
+
 [character]
-symbol = "└─$" # Cambia el símbolo al que deseas
-error_symbol = "└─$" # Para mantenerlo uniforme al fallar
+success_symbol = "\$"
+error_symbol = "❌\$" # Puedes personalizar el símbolo de error si quieres
 
 [hostname]
 ssh_only = false # Siempre muestra el hostname
-style = "bold dimmed green" # Cambia el estilo si quieres
-format = "on" # Define un único formato
+format = "$hostname" # Muestra solo el hostname, sin extras
 
 [directory]
+truncate_to_repo = false # No trunca a repositorios
 truncation_length = 2 # Ajusta cuántos directorios mostrar
-format = "[$path]"
-
-[line_break]
-disabled = false # Asegúrate de que haya salto de línea antes del prompt
+format = "[\$path]" # Muestra el directorio actual entre corchetes
 EOL
 echo "Configuración de Starship creada en $STARSHIP_CONFIG."
 
