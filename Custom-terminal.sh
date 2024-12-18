@@ -59,15 +59,22 @@ STARSHIP_CONFIG="$HOME/.config/starship.toml"
 mkdir -p "$(dirname "$STARSHIP_CONFIG")"
 cat > "$STARSHIP_CONFIG" <<EOL
 # Configuración de Starship para el prompt
-add_newline = false
-
-[format]
-format = "┌──(\$username@\$hostname)-[\$directory]\n└─\$character "
-
 [character]
-success_symbol = "\$"
-error_symbol = "❌"
-EOL
+symbol = "└─$" # Cambia el símbolo al que deseas
+error_symbol = "└─$" # Para mantenerlo uniforme al fallar
+
+[hostname]
+format = "on" # Activa el hostname
+ssh_only = false # Siempre muestra el hostname
+style = "bold dimmed green" # Cambia el estilo si quieres
+format = "┌──($hostname)-[$directory]"
+
+[directory]
+truncation_length = 2 # Ajusta cuántos directorios mostrar
+format = "[$path]"
+
+[line_break]
+disabled = false # Asegúrate de que haya salto de línea antes del prompt
 
 echo "Configuración de Starship creada en $STARSHIP_CONFIG."
 
