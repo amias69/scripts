@@ -64,7 +64,7 @@ add_newline = false
 
 # Este formato debe ser una cadena de texto, con las variables de Starship correctamente interpoladas
 format = """
-┌──(\$username@\$hostname)-[\$directory]
+┌──(\[$username\]@\[$hostname\])-[\$directory]
 └─\$character
 """
 
@@ -74,12 +74,13 @@ error_symbol = "❌\$" # Puedes personalizar el símbolo de error si quieres
 
 [hostname]
 ssh_only = false # Siempre muestra el hostname
-format = "$hostname" # Muestra solo el hostname, sin extras
+format = "[$hostname]" # Muestra solo el hostname, sin extras
 
 [directory]
 truncate_to_repo = false # No trunca a repositorios
 truncation_length = 2 # Ajusta cuántos directorios mostrar
-format = "[\$path]" # Muestra el directorio actual entre corchetes
+format = "[$path]" # Muestra el directorio actual entre corchetes
+
 EOL
 
 echo "Configuración de Starship creada en $STARSHIP_CONFIG."
