@@ -57,6 +57,7 @@ echo "Fuente Fira Code Nerd Font instalada."
 # Crear o modificar la configuración de Starship
 STARSHIP_CONFIG="$HOME/.config/starship.toml"
 mkdir -p "$(dirname "$STARSHIP_CONFIG")"
+
 cat > "$STARSHIP_CONFIG" <<EOL
 # Configuración de Starship para el prompt
 [character]
@@ -75,6 +76,7 @@ format = "[$path]"
 
 [line_break]
 disabled = false # Asegúrate de que haya salto de línea antes del prompt
+EOL
 
 echo "Configuración de Starship creada en $STARSHIP_CONFIG."
 
