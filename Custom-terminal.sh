@@ -77,8 +77,16 @@ format = "[$path]"
 [line_break]
 disabled = false # Asegúrate de que haya salto de línea antes del prompt
 EOL
-
 echo "Configuración de Starship creada en $STARSHIP_CONFIG."
+
+# Agregar Starship a ~/.zshrc
+ZSHRC="$HOME/.zshrc"
+if ! grep -Fxq 'eval "$(starship init zsh)"' "$ZSHRC"; then
+    echo 'eval "$(starship init zsh)"' >> "$ZSHRC"
+    echo "Configuración de Starship añadida a ~/.zshrc."
+else
+    echo "Starship ya está configurado en ~/.zshrc."
+fi
 
 # Finalización
 echo "¡Listo! El sistema está actualizado, zsh instalado, Starship configurado y Fira Code Nerd Font instalada."
