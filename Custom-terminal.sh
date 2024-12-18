@@ -62,9 +62,9 @@ cat > "$STARSHIP_CONFIG" <<EOL
 # Configuración de Starship para el prompt
 add_newline = false
 
-# Este formato debe ser una cadena de texto
+# Este formato debe ser una cadena de texto, con las variables de Starship correctamente interpoladas
 format = """
-┌──([$username@$hostname])-[\$directory]
+┌──(\$username@\$hostname)-[\$directory]
 └─\$character
 """
 
@@ -80,8 +80,8 @@ format = "$hostname" # Muestra solo el hostname, sin extras
 truncate_to_repo = false # No trunca a repositorios
 truncation_length = 2 # Ajusta cuántos directorios mostrar
 format = "[\$path]" # Muestra el directorio actual entre corchetes
-
 EOL
+
 echo "Configuración de Starship creada en $STARSHIP_CONFIG."
 
 # Agregar Starship a ~/.zshrc
