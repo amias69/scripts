@@ -1,0 +1,68 @@
+#up es una función hecha para fish que actualiza el sistema completo 
+#incluyendo aplicaciones de AUR y flatpak, limpia paquetes huerfanos 
+#y corrigue errores de actualizaciones fallidas.
+
+#Para hacerlo efectivo se copia la función directamente a la terminal 
+#darle a enter y seguidamente usar "funcsave up" para guardarlo
+
+up es una función con definición
+# Definido en ⁓.config/fish/functions/up.fish @ línea 1
+
+#copia la función desde aquí:
+function up
+    echo "=== Iniciando actualización ==="
+    
+    # Comprobar bloqueo de Pacman
+    if test -f /var/lib/pacman/db.lck
+        if pgrep -af 'pacman|yay|paru' >/dev/null
+            echo "Error: Pacman o Yay ya están en ejecución."
+            return 1
+        else
+            echo "Bloqueo huérfano detectado. Eliminándolo..."
+            sudo rm -f /var/lib/pacman/db.lck
+        end
+    end
+    
+    # Limpiar descargas incompletas
+    set downloads /var/cache/pacman/pkg/download-*
+    if test -e $downloads[1]
+        echo "Eliminando descargas incompletas..."
+        sudo rm -rf /var/cache/pacman/pkg/download-*
+    end
+    
+    # Actualizar sistema y AUR
+    echo "Actualizando sistema..."
+    yay -Syu --diffmenu=false
+    
+    # Actualizar Flatpaks
+    if command -sq flatpak
+    flatpak update -y
+        end
+        
+    # Si la actualización falló, detenerse
+    if test $status -ne 0
+        echo "La actualización falló."
+        return 1
+    end
+    
+    # Mantener las 3 últimas versiones en caché
+    if command -sq paccache
+        echo "Limpiando caché..."
+        sudo paccache -rk3
+    end
+    
+    # Eliminar huérfanos
+    set orphans (pacman -Qdtq)
+    
+    if test (count $orphans) -gt 0
+        echo "Eliminando paquetes huérfanos..."
+        sudo pacman -Rns $orphans
+    else
+        echo "No hay paquetes huérfanos."
+    end
+    
+    echo "=== Actualización completada ==="
+end
+
+~
+#aquí termina la función
